@@ -16,5 +16,20 @@ namespace tripManager
         {
             InitializeComponent();
         }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void manageTrip_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectTrip_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

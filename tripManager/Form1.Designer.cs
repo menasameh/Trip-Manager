@@ -35,30 +35,33 @@
             // 
             // manageTrip
             // 
-            this.manageTrip.Location = new System.Drawing.Point(47, 81);
+            this.manageTrip.Location = new System.Drawing.Point(36, 60);
             this.manageTrip.Name = "manageTrip";
-            this.manageTrip.Size = new System.Drawing.Size(75, 23);
+            this.manageTrip.Size = new System.Drawing.Size(100, 50);
             this.manageTrip.TabIndex = 0;
             this.manageTrip.Text = "ادارة رحلة";
             this.manageTrip.UseVisualStyleBackColor = true;
+            this.manageTrip.Click += new System.EventHandler(this.manageTrip_Click);
             // 
             // selectTrip
             // 
-            this.selectTrip.Location = new System.Drawing.Point(188, 81);
+            this.selectTrip.Location = new System.Drawing.Point(177, 60);
             this.selectTrip.Name = "selectTrip";
-            this.selectTrip.Size = new System.Drawing.Size(75, 23);
+            this.selectTrip.Size = new System.Drawing.Size(100, 50);
             this.selectTrip.TabIndex = 1;
             this.selectTrip.Text = "اختيار رحلة";
             this.selectTrip.UseVisualStyleBackColor = true;
+            this.selectTrip.Click += new System.EventHandler(this.selectTrip_Click);
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(329, 81);
+            this.exit.Location = new System.Drawing.Point(318, 60);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(75, 23);
+            this.exit.Size = new System.Drawing.Size(100, 50);
             this.exit.TabIndex = 2;
             this.exit.Text = "خروج";
             this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // Form1
             // 
