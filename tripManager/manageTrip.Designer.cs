@@ -41,11 +41,17 @@
             this.manageTripFreeze = new System.Windows.Forms.Button();
             this.manageTripBack = new System.Windows.Forms.Button();
             this.manageTripBasicContols = new System.Windows.Forms.Panel();
-            this.manageTripDone = new System.Windows.Forms.Button();
-            this.manageTripCancel = new System.Windows.Forms.Button();
             this.manageTripEditControls = new System.Windows.Forms.Panel();
+            this.manageTripCancel = new System.Windows.Forms.Button();
+            this.manageTripDone = new System.Windows.Forms.Button();
+            this.manageTripNotes = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.manageTripCreate = new System.Windows.Forms.Button();
+            this.manageTripBack2 = new System.Windows.Forms.Button();
+            this.manageTripCreateControls = new System.Windows.Forms.Panel();
             this.manageTripBasicContols.SuspendLayout();
             this.manageTripEditControls.SuspendLayout();
+            this.manageTripCreateControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -161,6 +167,7 @@
             this.manageTripBack.TabIndex = 13;
             this.manageTripBack.Text = "رجوع";
             this.manageTripBack.UseVisualStyleBackColor = true;
+            this.manageTripBack.Click += new System.EventHandler(this.manageTripBack_Click);
             // 
             // manageTripBasicContols
             // 
@@ -168,22 +175,21 @@
             this.manageTripBasicContols.Controls.Add(this.manageTripFreeze);
             this.manageTripBasicContols.Controls.Add(this.manageTripDelete);
             this.manageTripBasicContols.Controls.Add(this.manageTripEdit);
-            this.manageTripBasicContols.Controls.Add(this.manageTripEditControls);
-            this.manageTripBasicContols.Location = new System.Drawing.Point(25, 102);
+            this.manageTripBasicContols.Location = new System.Drawing.Point(26, 167);
             this.manageTripBasicContols.Name = "manageTripBasicContols";
             this.manageTripBasicContols.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.manageTripBasicContols.Size = new System.Drawing.Size(470, 68);
             this.manageTripBasicContols.TabIndex = 14;
             // 
-            // manageTripDone
+            // manageTripEditControls
             // 
-            this.manageTripDone.Location = new System.Drawing.Point(133, 8);
-            this.manageTripDone.Name = "manageTripDone";
-            this.manageTripDone.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.manageTripDone.Size = new System.Drawing.Size(100, 50);
-            this.manageTripDone.TabIndex = 15;
-            this.manageTripDone.Text = "تم";
-            this.manageTripDone.UseVisualStyleBackColor = true;
+            this.manageTripEditControls.Controls.Add(this.manageTripCancel);
+            this.manageTripEditControls.Controls.Add(this.manageTripDone);
+            this.manageTripEditControls.Location = new System.Drawing.Point(133, 325);
+            this.manageTripEditControls.Name = "manageTripEditControls";
+            this.manageTripEditControls.Size = new System.Drawing.Size(247, 67);
+            this.manageTripEditControls.TabIndex = 17;
+            this.manageTripEditControls.Visible = false;
             // 
             // manageTripCancel
             // 
@@ -195,22 +201,73 @@
             this.manageTripCancel.Text = "رجوع";
             this.manageTripCancel.UseVisualStyleBackColor = true;
             // 
-            // manageTripEditControls
+            // manageTripDone
             // 
-            this.manageTripEditControls.Controls.Add(this.manageTripCancel);
-            this.manageTripEditControls.Controls.Add(this.manageTripDone);
-            this.manageTripEditControls.Location = new System.Drawing.Point(107, 0);
-            this.manageTripEditControls.Name = "manageTripEditControls";
-            this.manageTripEditControls.Size = new System.Drawing.Size(247, 67);
-            this.manageTripEditControls.TabIndex = 17;
-            this.manageTripEditControls.Visible = false;
+            this.manageTripDone.Location = new System.Drawing.Point(133, 8);
+            this.manageTripDone.Name = "manageTripDone";
+            this.manageTripDone.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.manageTripDone.Size = new System.Drawing.Size(100, 50);
+            this.manageTripDone.TabIndex = 15;
+            this.manageTripDone.Text = "تم";
+            this.manageTripDone.UseVisualStyleBackColor = true;
+            // 
+            // manageTripNotes
+            // 
+            this.manageTripNotes.Location = new System.Drawing.Point(45, 98);
+            this.manageTripNotes.Multiline = true;
+            this.manageTripNotes.Name = "manageTripNotes";
+            this.manageTripNotes.Size = new System.Drawing.Size(409, 52);
+            this.manageTripNotes.TabIndex = 15;
+            this.manageTripNotes.Text = "\r\n\r\n";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(460, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "ملحوظات";
+            // 
+            // manageTripCreate
+            // 
+            this.manageTripCreate.Location = new System.Drawing.Point(133, 12);
+            this.manageTripCreate.Name = "manageTripCreate";
+            this.manageTripCreate.Size = new System.Drawing.Size(100, 50);
+            this.manageTripCreate.TabIndex = 17;
+            this.manageTripCreate.Text = "اضافه";
+            this.manageTripCreate.UseVisualStyleBackColor = true;
+            // 
+            // manageTripBack2
+            // 
+            this.manageTripBack2.Location = new System.Drawing.Point(14, 12);
+            this.manageTripBack2.Name = "manageTripBack2";
+            this.manageTripBack2.Size = new System.Drawing.Size(100, 50);
+            this.manageTripBack2.TabIndex = 18;
+            this.manageTripBack2.Text = "رجوع";
+            this.manageTripBack2.UseVisualStyleBackColor = true;
+            // 
+            // manageTripCreateControls
+            // 
+            this.manageTripCreateControls.Controls.Add(this.manageTripBack2);
+            this.manageTripCreateControls.Controls.Add(this.manageTripCreate);
+            this.manageTripCreateControls.Location = new System.Drawing.Point(133, 251);
+            this.manageTripCreateControls.Name = "manageTripCreateControls";
+            this.manageTripCreateControls.Size = new System.Drawing.Size(247, 68);
+            this.manageTripCreateControls.TabIndex = 19;
+            this.manageTripCreateControls.Visible = false;
             // 
             // manageTrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 179);
+            this.ClientSize = new System.Drawing.Size(519, 395);
+            this.ControlBox = false;
+            this.Controls.Add(this.manageTripCreateControls);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.manageTripNotes);
             this.Controls.Add(this.manageTripBasicContols);
+            this.Controls.Add(this.manageTripEditControls);
             this.Controls.Add(this.manageTripDate);
             this.Controls.Add(this.manageTripCount);
             this.Controls.Add(this.manageTripPrice);
@@ -220,9 +277,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "manageTrip";
-            this.Text = "manageTrip";
+            this.Text = "ادارة رحلة";
+            this.Load += new System.EventHandler(this.manageTrip_Load);
             this.manageTripBasicContols.ResumeLayout(false);
             this.manageTripEditControls.ResumeLayout(false);
+            this.manageTripCreateControls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +305,10 @@
         private System.Windows.Forms.Button manageTripDone;
         private System.Windows.Forms.Button manageTripCancel;
         private System.Windows.Forms.Panel manageTripEditControls;
+        private System.Windows.Forms.TextBox manageTripNotes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button manageTripCreate;
+        private System.Windows.Forms.Button manageTripBack2;
+        private System.Windows.Forms.Panel manageTripCreateControls;
     }
 }

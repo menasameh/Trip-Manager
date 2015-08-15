@@ -1,6 +1,6 @@
 ﻿namespace tripManager
 {
-    partial class Form1
+    partial class menu
     {
         /// <summary>
         /// Required designer variable.
@@ -63,15 +63,16 @@
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
-            // Form1
+            // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 185);
+            this.ControlBox = false;
             this.Controls.Add(this.exit);
             this.Controls.Add(this.selectTrip);
             this.Controls.Add(this.manageTrip);
-            this.Name = "Form1";
+            this.Name = "menu";
             this.Text = "ادارة الرحلات";
             this.ResumeLayout(false);
 

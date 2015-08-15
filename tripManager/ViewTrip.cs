@@ -10,27 +10,36 @@ using System.Windows.Forms;
 
 namespace tripManager
 {
-    public partial class manageTrip : Form
+    public partial class ViewTrip : Form
     {
-        State state;
         menu menu;
-        public manageTrip(State state, menu menu)
+        public ViewTrip(menu menu)
         {
-            this.state = state;
             this.menu = menu;
             InitializeComponent();
         }
 
-        private void manageTrip_Load(object sender, EventArgs e)
+        private void ViewTrip_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void manageTripBack_Click(object sender, EventArgs e)
+        private void manageTripNotes_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manageTripPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Back_Click(object sender, EventArgs e)
         {
             menu.Show();
             this.Close();
         }
 
+       
     }
 }

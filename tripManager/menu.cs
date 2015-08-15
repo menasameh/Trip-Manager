@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace tripManager
 {
-    public partial class Form1 : Form
+    public partial class menu : Form
     {
-        public Form1()
+        public menu()
         {
             InitializeComponent();
         }
@@ -24,12 +24,14 @@ namespace tripManager
 
         private void manageTrip_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new TripChooser(State.edit, this).Show();
         }
 
         private void selectTrip_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new TripChooser(State.view, this).Show();
         }
     }
 }

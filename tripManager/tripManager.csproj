@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="menu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="menu.Designer.cs">
+      <DependentUpon>menu.cs</DependentUpon>
     </Compile>
     <Compile Include="manageTrip.cs">
       <SubType>Form</SubType>
@@ -64,8 +64,14 @@
     <Compile Include="TripChooser.Designer.cs">
       <DependentUpon>TripChooser.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ViewTrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewTrip.Designer.cs">
+      <DependentUpon>ViewTrip.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="menu.resx">
+      <DependentUpon>menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="manageTrip.resx">
       <DependentUpon>manageTrip.cs</DependentUpon>
@@ -81,6 +87,9 @@
     </Compile>
     <EmbeddedResource Include="TripChooser.resx">
       <DependentUpon>TripChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewTrip.resx">
+      <DependentUpon>ViewTrip.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
