@@ -74,6 +74,7 @@
             this.Controls.Add(this.manageTrip);
             this.Name = "menu";
             this.Text = "ادارة الرحلات";
+            this.Load += new System.EventHandler(this.menu_Load);
             this.ResumeLayout(false);
 
         }

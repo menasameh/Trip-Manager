@@ -30,7 +30,7 @@ namespace tripManager
 
         private void TripChooser_Load(object sender, EventArgs e)
         {
-
+            CenterToScreen();
         }
 
         private void tripChooserSelect_Click(object sender, EventArgs e)

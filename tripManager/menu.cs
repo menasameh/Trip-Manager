@@ -33,5 +33,10 @@ namespace tripManager
             this.Hide();
             new TripChooser(State.view, this).Show();
         }
+
+        private void menu_Load(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }
