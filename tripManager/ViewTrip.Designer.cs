@@ -35,6 +35,7 @@
             this.hasBus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.clientDetails = new System.Windows.Forms.Panel();
+            this.addGroupPortable = new System.Windows.Forms.Button();
             this.clientID = new System.Windows.Forms.TextBox();
             this.clientPay = new System.Windows.Forms.TextBox();
             this.clientPhone = new System.Windows.Forms.TextBox();
@@ -76,6 +77,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnsGroupDoneEdits = new System.Windows.Forms.Panel();
             this.cancelEditDoneGroup = new System.Windows.Forms.Button();
             this.doneEditGroup = new System.Windows.Forms.Button();
@@ -103,6 +105,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.btnsGroupDoneEdits.SuspendLayout();
             this.groupDetails.SuspendLayout();
             this.btnsGroupSelected.SuspendLayout();
@@ -112,7 +115,7 @@
             // viewTripClients
             // 
             this.viewTripClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.viewTripClients.Location = new System.Drawing.Point(17, 160);
+            this.viewTripClients.Location = new System.Drawing.Point(19, 251);
             this.viewTripClients.Name = "viewTripClients";
             this.viewTripClients.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.viewTripClients.Size = new System.Drawing.Size(664, 138);
@@ -170,6 +173,7 @@
             // 
             // clientDetails
             // 
+            this.clientDetails.Controls.Add(this.addGroupPortable);
             this.clientDetails.Controls.Add(this.clientID);
             this.clientDetails.Controls.Add(this.clientPay);
             this.clientDetails.Controls.Add(this.clientPhone);
@@ -185,8 +189,19 @@
             this.clientDetails.Location = new System.Drawing.Point(288, 7);
             this.clientDetails.Name = "clientDetails";
             this.clientDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.clientDetails.Size = new System.Drawing.Size(393, 147);
+            this.clientDetails.Size = new System.Drawing.Size(393, 182);
             this.clientDetails.TabIndex = 6;
+            // 
+            // addGroupPortable
+            // 
+            this.addGroupPortable.Location = new System.Drawing.Point(163, 142);
+            this.addGroupPortable.Name = "addGroupPortable";
+            this.addGroupPortable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.addGroupPortable.Size = new System.Drawing.Size(90, 23);
+            this.addGroupPortable.TabIndex = 30;
+            this.addGroupPortable.Text = "اضافة مجموعة";
+            this.addGroupPortable.UseVisualStyleBackColor = true;
+            this.addGroupPortable.Click += new System.EventHandler(this.addGroupPortable_Click);
             // 
             // clientID
             // 
@@ -220,6 +235,7 @@
             this.clientName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.clientName.Size = new System.Drawing.Size(100, 20);
             this.clientName.TabIndex = 9;
+            this.clientName.TextChanged += new System.EventHandler(this.clientName_TextChanged);
             // 
             // label4
             // 
@@ -366,7 +382,7 @@
             // 
             // addGroup
             // 
-            this.addGroup.Location = new System.Drawing.Point(491, 68);
+            this.addGroup.Location = new System.Drawing.Point(619, 45);
             this.addGroup.Name = "addGroup";
             this.addGroup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.addGroup.Size = new System.Drawing.Size(90, 23);
@@ -580,7 +596,7 @@
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabControl1.RightToLeftLayout = true;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1028, 333);
+            this.tabControl1.Size = new System.Drawing.Size(1028, 442);
             this.tabControl1.TabIndex = 43;
             // 
             // tabPage1
@@ -597,13 +613,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1020, 307);
+            this.tabPage1.Size = new System.Drawing.Size(1020, 416);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "العملاء";
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Controls.Add(this.btnsGroupDoneEdits);
             this.tabPage2.Controls.Add(this.groupDetails);
             this.tabPage2.Controls.Add(this.btnsGroupSelected);
@@ -613,15 +630,23 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1020, 307);
+            this.tabPage2.Size = new System.Drawing.Size(1020, 416);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "المجموعات";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(26, 45);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(379, 150);
+            this.dataGridView1.TabIndex = 48;
             // 
             // btnsGroupDoneEdits
             // 
             this.btnsGroupDoneEdits.Controls.Add(this.cancelEditDoneGroup);
             this.btnsGroupDoneEdits.Controls.Add(this.doneEditGroup);
-            this.btnsGroupDoneEdits.Location = new System.Drawing.Point(164, 97);
+            this.btnsGroupDoneEdits.Location = new System.Drawing.Point(341, 256);
             this.btnsGroupDoneEdits.Name = "btnsGroupDoneEdits";
             this.btnsGroupDoneEdits.Size = new System.Drawing.Size(119, 153);
             this.btnsGroupDoneEdits.TabIndex = 47;
@@ -719,7 +744,7 @@
             this.btnsGroupSelected.Controls.Add(this.deleteGroup);
             this.btnsGroupSelected.Controls.Add(this.editGroup);
             this.btnsGroupSelected.Controls.Add(this.cancelEditGroup);
-            this.btnsGroupSelected.Location = new System.Drawing.Point(321, 97);
+            this.btnsGroupSelected.Location = new System.Drawing.Point(472, 256);
             this.btnsGroupSelected.Name = "btnsGroupSelected";
             this.btnsGroupSelected.Size = new System.Drawing.Size(115, 153);
             this.btnsGroupSelected.TabIndex = 45;
@@ -786,6 +811,9 @@
             // groupList
             // 
             this.groupList.FormattingEnabled = true;
+            this.groupList.Items.AddRange(new object[] {
+            "مجموعه 1",
+            "مجموعه 2"});
             this.groupList.Location = new System.Drawing.Point(761, 45);
             this.groupList.Name = "groupList";
             this.groupList.Size = new System.Drawing.Size(121, 21);
@@ -796,7 +824,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 463);
+            this.ClientSize = new System.Drawing.Size(1044, 622);
             this.ControlBox = false;
             this.Controls.Add(this.Back);
             this.Controls.Add(this.tabControl1);
@@ -824,6 +852,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.btnsGroupDoneEdits.ResumeLayout(false);
             this.groupDetails.ResumeLayout(false);
             this.groupDetails.PerformLayout();
@@ -905,5 +934,7 @@
         private System.Windows.Forms.Panel btnsGroupDoneEdits;
         private System.Windows.Forms.Button cancelEditDoneGroup;
         private System.Windows.Forms.Button doneEditGroup;
+        private System.Windows.Forms.Button addGroupPortable;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

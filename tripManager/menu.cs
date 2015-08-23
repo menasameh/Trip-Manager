@@ -25,18 +25,48 @@ namespace tripManager
         private void manageTrip_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new TripChooser(State.edit, this).Show();
+
+            new manageTrip(State.edit, this).Show();
         }
 
         private void selectTrip_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new TripChooser(State.view, this).Show();
+            String tripName = tripChooserList.SelectedText;
+            new ViewTrip(this).Show();
         }
 
         private void menu_Load(object sender, EventArgs e)
         {
+            this.VisibleChanged += showDefaultButtons;
+            showDefaultButtons();
+        }
+
+        private void showDefaultButtons()
+        {
+            selectTrip.Enabled = false;
+            manageTrip.Enabled = false;
+            tripChooserList.Text = "";
+            tripChooserList.SelectedText = "";
             CenterToScreen();
+        }
+
+        public void showDefaultButtons(object sender, EventArgs e)
+        {
+            showDefaultButtons();
+        }
+
+
+        private void tripChooserCreate_Click(object sender, EventArgs e)
+        {
+            new manageTrip(State.create, this).Show();
+            this.Hide();
+        }
+
+        private void tripChooserList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectTrip.Enabled = true;
+            manageTrip.Enabled = true;
         }
     }
 }

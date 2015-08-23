@@ -330,7 +330,7 @@ namespace tripManager
             int promptValue = Prompt.ShowDialog("هل تود بالفعل مسح المجموعة ؟", "تحذير");
             if (promptValue == 1)
             {
-                clientsDefaults();
+                groupsDefaults();
             }
             else
             {
@@ -356,6 +356,18 @@ namespace tripManager
         private void groupList_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupsSelectElements();
+        }
+
+        private void clientName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addGroupPortable_Click(object sender, EventArgs e)
+        {
+            CreateGroup cg = CreateGroup.getInstance();
+            cg.Show();
+            cg.Focus();
         }
 
        
