@@ -34,14 +34,15 @@
             this.hasSizeLimit = new System.Windows.Forms.CheckBox();
             this.isBus = new System.Windows.Forms.RadioButton();
             this.isGroup = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cancelCreateGroup = new System.Windows.Forms.Button();
+            this.create = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // groupName
             // 
             this.groupName.Location = new System.Drawing.Point(56, 54);
             this.groupName.Name = "groupName";
+            this.groupName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.groupName.Size = new System.Drawing.Size(100, 20);
             this.groupName.TabIndex = 39;
             // 
@@ -49,6 +50,7 @@
             // 
             this.groupSize.Location = new System.Drawing.Point(56, 80);
             this.groupSize.Name = "groupSize";
+            this.groupSize.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.groupSize.Size = new System.Drawing.Size(100, 20);
             this.groupSize.TabIndex = 38;
             // 
@@ -57,6 +59,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(180, 54);
             this.label11.Name = "label11";
+            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label11.Size = new System.Drawing.Size(30, 13);
             this.label11.TabIndex = 37;
             this.label11.Text = "الاسم";
@@ -66,16 +69,19 @@
             this.hasSizeLimit.AutoSize = true;
             this.hasSizeLimit.Location = new System.Drawing.Point(171, 80);
             this.hasSizeLimit.Name = "hasSizeLimit";
+            this.hasSizeLimit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.hasSizeLimit.Size = new System.Drawing.Size(74, 17);
             this.hasSizeLimit.TabIndex = 36;
             this.hasSizeLimit.Text = "عدد محدود";
             this.hasSizeLimit.UseVisualStyleBackColor = true;
+            this.hasSizeLimit.CheckedChanged += new System.EventHandler(this.hasSizeLimit_CheckedChanged);
             // 
             // isBus
             // 
             this.isBus.AutoSize = true;
             this.isBus.Location = new System.Drawing.Point(27, 25);
             this.isBus.Name = "isBus";
+            this.isBus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.isBus.Size = new System.Drawing.Size(55, 17);
             this.isBus.TabIndex = 35;
             this.isBus.TabStop = true;
@@ -87,29 +93,35 @@
             this.isGroup.AutoSize = true;
             this.isGroup.Location = new System.Drawing.Point(170, 25);
             this.isGroup.Name = "isGroup";
+            this.isGroup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.isGroup.Size = new System.Drawing.Size(60, 17);
             this.isGroup.TabIndex = 34;
             this.isGroup.TabStop = true;
             this.isGroup.Text = "مجموعة";
             this.isGroup.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // create
             // 
-            this.button1.Location = new System.Drawing.Point(170, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "اضافة";
-            this.button1.UseVisualStyleBackColor = true;
+            this.create.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.create.Location = new System.Drawing.Point(170, 127);
+            this.create.Name = "create";
+            this.create.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.create.Size = new System.Drawing.Size(75, 23);
+            this.create.TabIndex = 1;
+            this.create.Text = "اضافة";
+            this.create.UseVisualStyleBackColor = true;
+            this.create.Click += new System.EventHandler(this.create_Click);
             // 
-            // cancelCreateGroup
+            // cancel
             // 
-            this.cancelCreateGroup.Location = new System.Drawing.Point(7, 127);
-            this.cancelCreateGroup.Name = "cancelCreateGroup";
-            this.cancelCreateGroup.Size = new System.Drawing.Size(75, 23);
-            this.cancelCreateGroup.TabIndex = 0;
-            this.cancelCreateGroup.Text = "رجوع";
-            this.cancelCreateGroup.UseVisualStyleBackColor = true;
+            this.cancel.Location = new System.Drawing.Point(7, 127);
+            this.cancel.Name = "cancel";
+            this.cancel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.TabIndex = 0;
+            this.cancel.Text = "رجوع";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
             // CreateGroup
             // 
@@ -117,8 +129,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(256, 167);
             this.ControlBox = false;
-            this.Controls.Add(this.cancelCreateGroup);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cancel);
+            this.Controls.Add(this.create);
             this.Controls.Add(this.groupName);
             this.Controls.Add(this.isGroup);
             this.Controls.Add(this.groupSize);
@@ -141,7 +153,7 @@
         private System.Windows.Forms.CheckBox hasSizeLimit;
         private System.Windows.Forms.RadioButton isBus;
         private System.Windows.Forms.RadioButton isGroup;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button cancelCreateGroup;
+        private System.Windows.Forms.Button create;
+        private System.Windows.Forms.Button cancel;
     }
 }

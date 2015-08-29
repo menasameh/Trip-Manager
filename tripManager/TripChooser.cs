@@ -10,10 +10,7 @@ using System.Windows.Forms;
 
 namespace tripManager
 {
-    public enum State
-    {
-        edit, view, create
-    }
+    
 
     public partial class TripChooser : Form
     {
@@ -39,7 +36,7 @@ namespace tripManager
             switch (state)
             {
                 case State.edit:
-                    new manageTrip(State.edit, menu).Show();
+                    new manageTrip( menu).Show();
                     break;
                 case State.view:
                     new ViewTrip(menu).Show();
@@ -51,7 +48,7 @@ namespace tripManager
         private void tripChooserCreate_Click(object sender, EventArgs e)
         {
             
-            new manageTrip(State.create, menu).Show();
+            new manageTrip( menu).Show();
             this.Close();
         }
 

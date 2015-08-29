@@ -31,8 +31,8 @@
             this.manageTrip = new System.Windows.Forms.Button();
             this.selectTrip = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
-            this.tripChooserCreate = new System.Windows.Forms.Button();
-            this.tripChooserList = new System.Windows.Forms.ComboBox();
+            this.createTrip = new System.Windows.Forms.Button();
+            this.tripList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -68,27 +68,27 @@
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
-            // tripChooserCreate
+            // createTrip
             // 
-            this.tripChooserCreate.Location = new System.Drawing.Point(230, 76);
-            this.tripChooserCreate.Name = "tripChooserCreate";
-            this.tripChooserCreate.Size = new System.Drawing.Size(100, 50);
-            this.tripChooserCreate.TabIndex = 8;
-            this.tripChooserCreate.Text = "انشاء رحله جديده";
-            this.tripChooserCreate.UseVisualStyleBackColor = true;
-            this.tripChooserCreate.Click += new System.EventHandler(this.tripChooserCreate_Click);
+            this.createTrip.Location = new System.Drawing.Point(228, 76);
+            this.createTrip.Name = "createTrip";
+            this.createTrip.Size = new System.Drawing.Size(100, 50);
+            this.createTrip.TabIndex = 8;
+            this.createTrip.Text = "انشاء رحله جديده";
+            this.createTrip.UseVisualStyleBackColor = true;
+            this.createTrip.Click += new System.EventHandler(this.tripChooserCreate_Click);
             // 
-            // tripChooserList
+            // tripList
             // 
-            this.tripChooserList.FormattingEnabled = true;
-            this.tripChooserList.Items.AddRange(new object[] {
+            this.tripList.FormattingEnabled = true;
+            this.tripList.Items.AddRange(new object[] {
             "رحلة 1",
             "رحلة 2"});
-            this.tripChooserList.Location = new System.Drawing.Point(136, 43);
-            this.tripChooserList.Name = "tripChooserList";
-            this.tripChooserList.Size = new System.Drawing.Size(192, 21);
-            this.tripChooserList.TabIndex = 5;
-            this.tripChooserList.SelectedIndexChanged += new System.EventHandler(this.tripChooserList_SelectedIndexChanged);
+            this.tripList.Location = new System.Drawing.Point(136, 43);
+            this.tripList.Name = "tripList";
+            this.tripList.Size = new System.Drawing.Size(192, 21);
+            this.tripList.TabIndex = 5;
+            this.tripList.SelectedIndexChanged += new System.EventHandler(this.tripChooserList_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -107,8 +107,8 @@
             this.ClientSize = new System.Drawing.Size(452, 148);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tripChooserCreate);
-            this.Controls.Add(this.tripChooserList);
+            this.Controls.Add(this.createTrip);
+            this.Controls.Add(this.tripList);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.selectTrip);
             this.Controls.Add(this.manageTrip);
@@ -125,8 +125,8 @@
         private System.Windows.Forms.Button manageTrip;
         private System.Windows.Forms.Button selectTrip;
         private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.Button tripChooserCreate;
-        private System.Windows.Forms.ComboBox tripChooserList;
+        private System.Windows.Forms.Button createTrip;
+        private System.Windows.Forms.ComboBox tripList;
         private System.Windows.Forms.Label label1;
     }
 }

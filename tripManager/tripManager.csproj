@@ -47,7 +47,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,6 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\context.cs" />
+    <Compile Include="controller\DBHandler.cs" />
+    <Compile Include="controller\DBinit.cs" />
+    <Compile Include="controller\handlerInterface.cs" />
     <Compile Include="CreateGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,15 +88,36 @@
     <Compile Include="manageTrip.Designer.cs">
       <DependentUpon>manageTrip.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508291024316_d.cs" />
+    <Compile Include="Migrations\201508291024316_d.Designer.cs">
+      <DependentUpon>201508291024316_d.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508291042170_g.cs" />
+    <Compile Include="Migrations\201508291042170_g.Designer.cs">
+      <DependentUpon>201508291042170_g.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508291135082_r.cs" />
+    <Compile Include="Migrations\201508291135082_r.Designer.cs">
+      <DependentUpon>201508291135082_r.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508291149293_r1.cs" />
+    <Compile Include="Migrations\201508291149293_r1.Designer.cs">
+      <DependentUpon>201508291149293_r1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508291405261_e.cs" />
+    <Compile Include="Migrations\201508291405261_e.Designer.cs">
+      <DependentUpon>201508291405261_e.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="model\Client.cs" />
+    <Compile Include="model\ClientGroup.cs" />
+    <Compile Include="model\Group.cs" />
+    <Compile Include="model\Reservation.cs" />
+    <Compile Include="model\Trip.cs" />
+    <Compile Include="model\TripGroup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="TripChooser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TripChooser.Designer.cs">
-      <DependentUpon>TripChooser.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewTrip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +133,21 @@
     <EmbeddedResource Include="manageTrip.resx">
       <DependentUpon>manageTrip.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291024316_d.resx">
+      <DependentUpon>201508291024316_d.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291042170_g.resx">
+      <DependentUpon>201508291042170_g.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291135082_r.resx">
+      <DependentUpon>201508291135082_r.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291149293_r1.resx">
+      <DependentUpon>201508291149293_r1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291405261_e.resx">
+      <DependentUpon>201508291405261_e.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -110,12 +157,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TripChooser.resx">
-      <DependentUpon>TripChooser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ViewTrip.resx">
       <DependentUpon>ViewTrip.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

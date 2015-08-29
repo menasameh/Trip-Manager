@@ -1,31 +1,86 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using tripManager.controller;
+using tripManager.model;
 
 namespace tripManager
 {
     public partial class ViewTrip : Form
     {
         menu menu;
-        public ViewTrip(menu menu)
+        Trip trip;
+        Group selectedGroup;
+        Client selectedClient;
+        int tripID;
+        public bool open;
+
+
+        ArrayList groupsIDs;
+        ArrayList groupsList;
+
+
+
+        public ViewTrip(int tripID, menu menu)
         {
+            open = false;
             this.menu = menu;
+            this.tripID = tripID;
             InitializeComponent();
         }
 
         private void ViewTrip_Load(object sender, EventArgs e)
         {
+            DBHandler instance = DBHandler.getInstance();
+            trip = instance.getTrip(tripID);
+            tripToFields();
+            updateGroupList();
             CenterToScreen();
             clientsDefaults();
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
         }
 
+
+        public void updateGroupList()
+        {
+            DBHandler instance = DBHandler.getInstance();
+            List<Group> groups = instance.getTripGroups(tripID);
+
+
+            groupsIDs = new ArrayList();
+            groupsList = new ArrayList();
+
+            for (int i = 0; i < groups.Count; i++)
+            {
+                groupsList.Add(groups[i].name);
+                groupsIDs.Add(groups[i].ID);
+            }
+            groupList.SelectedIndex = -1;
+
+            groupList.DataSource = groupsList;
+            groupList.SelectedIndex = -1;
+            
+        }
+
+
+
+        public void tripToFields()
+        {
+            tripName.Text = trip.name;
+            tripDate.Value = trip.Date;
+            tripPrice.Text = trip.price + "";
+            tripNotes.Text = trip.notes;
+            changablePrice.Checked = trip.hasChangablePrice;
+            tripCount.Text = trip.reservations.Count + "";
+        }
 
         public void clientsDefaults()
         {
@@ -44,6 +99,8 @@ namespace tripManager
             btnsClientsCreate.Visible = false;
             btnsClientsDoneEdits.Visible = false;
             btnsClientsSelected.Visible = false;
+            actionButtons.Visible = true;
+
         }
 
         public void groupsDefaults()
@@ -63,8 +120,6 @@ namespace tripManager
             btnsGroupSelected.Visible = false;
         }
 
-        //public void 
-
 
         public void clientsCreateElements()
         {
@@ -83,6 +138,7 @@ namespace tripManager
             btnsClientsCreate.Visible = true;
             btnsClientsDoneEdits.Visible = false;
             btnsClientsSelected.Visible = false;
+            actionButtons.Visible = false;
         }
 
         public void groupsCreateElements()
@@ -93,6 +149,11 @@ namespace tripManager
 
             isBus.Enabled = true;
             isGroup.Enabled = true;
+            groupSize.Enabled = false;
+
+            isGroup.Checked = true;
+            groupName.Text = "";
+            hasSizeLimit.Checked = false;
 
             groupList.Visible = false;
             groupDetails.Visible = true;
@@ -119,6 +180,7 @@ namespace tripManager
             btnsClientsCreate.Visible = false;
             btnsClientsDoneEdits.Visible = false;
             btnsClientsSelected.Visible = false;
+            actionButtons.Visible = false;
         }
 
         public void clientsSelectElements()
@@ -136,6 +198,7 @@ namespace tripManager
             btnsClientsCreate.Visible = false;
             btnsClientsDoneEdits.Visible = false;
             btnsClientsSelected.Visible = true;
+            actionButtons.Visible = false;
         }
 
 
@@ -171,12 +234,14 @@ namespace tripManager
             btnsClientsCreate.Visible = false;
             btnsClientsDoneEdits.Visible = true;
             btnsClientsSelected.Visible = false;
+            actionButtons.Visible = false;
         }
 
         public void groupsEnableEditElements()
         {
             groupName.Enabled = true;
             hasSizeLimit.Enabled = true;
+            ShowSizeLimit();
 
             isBus.Enabled = true;
             isGroup.Enabled = true;
@@ -210,6 +275,7 @@ namespace tripManager
 
         private void addClient_Click(object sender, EventArgs e)
         {
+           
             clientsCreateElements();
         }
 
@@ -253,7 +319,7 @@ namespace tripManager
 
         private void deleteClient_Click(object sender, EventArgs e)
         {
-            int promptValue = Prompt.ShowDialog("هل تود بالفعل مسح العميل ؟", "تحذير");
+            int promptValue = Prompt.ShowConfirmDialog("هل تود بالفعل مسح العميل ؟", "تحذير");
             if(promptValue == 1){
                 clientsDefaults();
             }
@@ -266,7 +332,7 @@ namespace tripManager
 
         private void cancelEdit_Click(object sender, EventArgs e)
         {
-            int promptValue = Prompt.ShowDialog("هل تود الرجوع عن التغيرات ؟", "تحذير");
+            int promptValue = Prompt.ShowConfirmDialog("هل تود الرجوع عن التغيرات ؟", "تحذير");
             if (promptValue == 1)
             {
                 clientsSelectElements();
@@ -293,6 +359,8 @@ namespace tripManager
             else
             {
                 groupsDefaults();
+                //List<TripGroup> arr =  trip.tripGroups.ToList();
+                //updateGroupList();
             }
         }
 
@@ -303,12 +371,13 @@ namespace tripManager
 
         private void cancelEditGroup_Click(object sender, EventArgs e)
         {
+            updateGroupList();
             groupsDefaults();
         }
 
         private void cancelEditDoneGroup_Click(object sender, EventArgs e)
         {
-            int promptValue = Prompt.ShowDialog("هل تود الرجوع عن التغيرات ؟", "تحذير");
+            int promptValue = Prompt.ShowConfirmDialog("هل تود الرجوع عن التغيرات ؟", "تحذير");
             if (promptValue == 1)
             {
                 groupsSelectElements();
@@ -322,19 +391,41 @@ namespace tripManager
 
         private void createGroup_Click(object sender, EventArgs e)
         {
-            groupsDefaults();
-        }
-
-        private void deleteGroup_Click(object sender, EventArgs e)
-        {
-            int promptValue = Prompt.ShowDialog("هل تود بالفعل مسح المجموعة ؟", "تحذير");
-            if (promptValue == 1)
+            DBHandler instance = DBHandler.getInstance();
+            selectedGroup = new Group();
+            selectedGroup.tripID = tripID;
+            fieldsToGroup();
+            if (instance.insertTripGroup(trip, selectedGroup))
             {
+                updateGroupList();
                 groupsDefaults();
             }
             else
             {
+                Prompt.ShowWarningDialog("error", "error");
+            }
+                       
+        }
 
+        private void fieldsToGroup()
+        {
+            selectedGroup.name = groupName.Text;
+            selectedGroup.isBus = isBus.Checked;
+            selectedGroup.hasSizeLimit = hasSizeLimit.Checked;
+            if(hasSizeLimit.Checked)
+                selectedGroup.capacity = int.Parse(groupSize.Text);
+        }
+
+        private void deleteGroup_Click(object sender, EventArgs e)
+        {
+            int promptValue = Prompt.ShowConfirmDialog("هل تود بالفعل مسح المجموعة ؟", "تحذير");
+            if (promptValue == 1)
+            {
+                //TODO is this "remove group" cascading? yes it is :D
+                DBHandler instance = DBHandler.getInstance();
+                instance.removeGroup(selectedGroup);
+                updateGroupList();
+                groupsDefaults();
             }
         }
 
@@ -345,6 +436,12 @@ namespace tripManager
 
         private void doneEditGroup_Click(object sender, EventArgs e)
         {
+            DBHandler instance = DBHandler.getInstance();
+
+            fieldsToGroup();
+
+            instance.updateGroup(selectedGroup);
+
             groupsSelectElements();
         }
 
@@ -355,7 +452,28 @@ namespace tripManager
 
         private void groupList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int index = ((ComboBox)sender).SelectedIndex;
+            if(index == -1){
+                return;
+            }
+            //updateGroupList();
+            DBHandler instance = DBHandler.getInstance();
+            selectedGroup = instance.getGroup((int)groupsIDs[index]);
+            groupToFields();
+            ShowSizeLimit();
             groupsSelectElements();
+        }
+
+        private void groupToFields()
+        {
+            groupName.Text = selectedGroup.name;
+            isBus.Checked = selectedGroup.isBus;
+            isGroup.Checked = !selectedGroup.isBus;
+            hasSizeLimit.Checked = selectedGroup.hasSizeLimit;
+            if (hasSizeLimit.Checked)
+                groupSize.Text = selectedGroup.capacity + "";
+            else
+                groupSize.Text = "";
         }
 
         private void clientName_TextChanged(object sender, EventArgs e)
@@ -365,10 +483,35 @@ namespace tripManager
 
         private void addGroupPortable_Click(object sender, EventArgs e)
         {
-            CreateGroup cg = CreateGroup.getInstance();
+            if(open){
+                return;
+            }
+
+            CreateGroup cg = new CreateGroup();
+            cg.setTrip(trip, this);
             cg.Show();
-            cg.Focus();
+            open = true;
+            
         }
+
+        private void hasSizeLimit_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowSizeLimit();
+        }
+
+        private void ShowSizeLimit()
+        {
+            if (hasSizeLimit.Checked)
+            {
+                groupSize.Enabled = true;
+            }
+            else
+            {
+                groupSize.Enabled = false;
+            }
+        }
+
+       
 
        
 
@@ -401,7 +544,7 @@ namespace tripManager
         }
 
 
-        public static int ShowDialog(string text, string title)
+        public static int ShowConfirmDialog(string text, string title)
         {
             Form prompt = new Form();
             prompt.Width = 200;
@@ -409,7 +552,7 @@ namespace tripManager
             prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
             prompt.Text = title;
             prompt.StartPosition = FormStartPosition.CenterScreen;
-            Label textLabel = new Label() { Left = 20, Top = 20, Width=180, Text = text };
+            Label textLabel = new Label() { Left = 20, Top = 20, Width = 180, Text = text };
             Button yes = new Button() { Text = "موافق", Left = 20, Width = 60, Top = 70, DialogResult = DialogResult.Yes };
             yes.Click += (sender, e) => { prompt.Close(); };
             Button cancel = new Button() { Text = "رجوع", Left = 100, Width = 60, Top = 70, DialogResult = DialogResult.No };
@@ -421,6 +564,28 @@ namespace tripManager
             prompt.CancelButton = cancel;
 
             return prompt.ShowDialog() == DialogResult.Yes ? 1 : 0;
+        }
+
+        public static void ShowWarningDialog(string text, string title)
+        {
+            Form prompt = new Form();
+            prompt.Width = 200;
+            prompt.Height = 150;
+            prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
+            prompt.Text = title;
+            prompt.StartPosition = FormStartPosition.CenterScreen;
+
+            Label textLabel = new Label() { Left = 20, Top = 20, Width = 180, Text = text };
+            Button yes = new Button() { Text = "موافق", Left = 20, Width = 60, Top = 70, DialogResult = DialogResult.Yes };
+            yes.Click += (sender, e) => { prompt.Close(); };
+           
+           
+            prompt.Controls.Add(yes);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = yes;
+   
+
+            prompt.ShowDialog();
         }
     }
 

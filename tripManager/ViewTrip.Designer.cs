@@ -57,7 +57,6 @@
             this.addGroup = new System.Windows.Forms.Button();
             this.createClient = new System.Windows.Forms.Button();
             this.cancelCreate = new System.Windows.Forms.Button();
-            this.tripDate = new System.Windows.Forms.TextBox();
             this.Back = new System.Windows.Forms.Button();
             this.btnsClientsCreate = new System.Windows.Forms.Panel();
             this.searchPanel = new System.Windows.Forms.Panel();
@@ -76,6 +75,7 @@
             this.btnsClientsDoneEdits = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.actionButtons = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnsGroupDoneEdits = new System.Windows.Forms.Panel();
@@ -96,6 +96,8 @@
             this.createGroup = new System.Windows.Forms.Button();
             this.cancelCreateGroup = new System.Windows.Forms.Button();
             this.groupList = new System.Windows.Forms.ComboBox();
+            this.changablePrice = new System.Windows.Forms.CheckBox();
+            this.tripDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.viewTripClients)).BeginInit();
             this.clientDetails.SuspendLayout();
             this.btnsClientsCreate.SuspendLayout();
@@ -104,6 +106,7 @@
             this.btnsClientsDoneEdits.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.actionButtons.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.btnsGroupDoneEdits.SuspendLayout();
@@ -270,7 +273,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(504, 96);
+            this.label5.Location = new System.Drawing.Point(504, 99);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(47, 13);
@@ -280,7 +283,8 @@
             // tripNotes
             // 
             this.tripNotes.BackColor = System.Drawing.SystemColors.Control;
-            this.tripNotes.Location = new System.Drawing.Point(86, 76);
+            this.tripNotes.Enabled = false;
+            this.tripNotes.Location = new System.Drawing.Point(86, 79);
             this.tripNotes.Multiline = true;
             this.tripNotes.Name = "tripNotes";
             this.tripNotes.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -292,7 +296,7 @@
             // tripCount
             // 
             this.tripCount.AutoSize = true;
-            this.tripCount.Location = new System.Drawing.Point(180, 45);
+            this.tripCount.Location = new System.Drawing.Point(180, 39);
             this.tripCount.Name = "tripCount";
             this.tripCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tripCount.Size = new System.Drawing.Size(13, 13);
@@ -302,7 +306,8 @@
             // tripPrice
             // 
             this.tripPrice.BackColor = System.Drawing.SystemColors.Control;
-            this.tripPrice.Location = new System.Drawing.Point(365, 45);
+            this.tripPrice.Enabled = false;
+            this.tripPrice.Location = new System.Drawing.Point(365, 35);
             this.tripPrice.Name = "tripPrice";
             this.tripPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tripPrice.Size = new System.Drawing.Size(100, 20);
@@ -312,7 +317,8 @@
             // tripName
             // 
             this.tripName.BackColor = System.Drawing.SystemColors.Control;
-            this.tripName.Location = new System.Drawing.Point(365, 17);
+            this.tripName.Enabled = false;
+            this.tripName.Location = new System.Drawing.Point(365, 10);
             this.tripName.Name = "tripName";
             this.tripName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tripName.Size = new System.Drawing.Size(100, 20);
@@ -321,7 +327,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(262, 45);
+            this.label6.Location = new System.Drawing.Point(262, 39);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label6.Size = new System.Drawing.Size(74, 13);
@@ -331,7 +337,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(259, 17);
+            this.label7.Location = new System.Drawing.Point(259, 10);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label7.Size = new System.Drawing.Size(61, 13);
@@ -341,7 +347,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(499, 46);
+            this.label8.Location = new System.Drawing.Point(499, 39);
             this.label8.Name = "label8";
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label8.Size = new System.Drawing.Size(52, 13);
@@ -351,7 +357,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(496, 17);
+            this.label9.Location = new System.Drawing.Point(496, 10);
             this.label9.Name = "label9";
             this.label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label9.Size = new System.Drawing.Size(53, 13);
@@ -360,7 +366,7 @@
             // 
             // addClient
             // 
-            this.addClient.Location = new System.Drawing.Point(17, 11);
+            this.addClient.Location = new System.Drawing.Point(12, 10);
             this.addClient.Name = "addClient";
             this.addClient.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.addClient.Size = new System.Drawing.Size(90, 23);
@@ -371,7 +377,7 @@
             // 
             // editClient
             // 
-            this.editClient.Location = new System.Drawing.Point(17, 55);
+            this.editClient.Location = new System.Drawing.Point(12, 53);
             this.editClient.Name = "editClient";
             this.editClient.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.editClient.Size = new System.Drawing.Size(90, 23);
@@ -412,15 +418,6 @@
             this.cancelCreate.Text = "رجوع";
             this.cancelCreate.UseVisualStyleBackColor = true;
             this.cancelCreate.Click += new System.EventHandler(this.cancelCreate_Click);
-            // 
-            // tripDate
-            // 
-            this.tripDate.BackColor = System.Drawing.SystemColors.Control;
-            this.tripDate.Location = new System.Drawing.Point(131, 14);
-            this.tripDate.Name = "tripDate";
-            this.tripDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tripDate.Size = new System.Drawing.Size(100, 20);
-            this.tripDate.TabIndex = 32;
             // 
             // Back
             // 
@@ -602,8 +599,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.addClient);
-            this.tabPage1.Controls.Add(this.editClient);
+            this.tabPage1.Controls.Add(this.actionButtons);
             this.tabPage1.Controls.Add(this.btnsClientsDoneEdits);
             this.tabPage1.Controls.Add(this.btnsClientsCreate);
             this.tabPage1.Controls.Add(this.btnsClientsSelected);
@@ -616,6 +612,15 @@
             this.tabPage1.Size = new System.Drawing.Size(1020, 416);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "العملاء";
+            // 
+            // actionButtons
+            // 
+            this.actionButtons.Controls.Add(this.addClient);
+            this.actionButtons.Controls.Add(this.editClient);
+            this.actionButtons.Location = new System.Drawing.Point(19, 21);
+            this.actionButtons.Name = "actionButtons";
+            this.actionButtons.Size = new System.Drawing.Size(118, 93);
+            this.actionButtons.TabIndex = 43;
             // 
             // tabPage2
             // 
@@ -716,6 +721,7 @@
             this.hasSizeLimit.TabIndex = 36;
             this.hasSizeLimit.Text = "عدد محدود";
             this.hasSizeLimit.UseVisualStyleBackColor = true;
+            this.hasSizeLimit.CheckedChanged += new System.EventHandler(this.hasSizeLimit_CheckedChanged);
             // 
             // isBus
             // 
@@ -811,14 +817,32 @@
             // groupList
             // 
             this.groupList.FormattingEnabled = true;
-            this.groupList.Items.AddRange(new object[] {
-            "مجموعه 1",
-            "مجموعه 2"});
             this.groupList.Location = new System.Drawing.Point(761, 45);
             this.groupList.Name = "groupList";
             this.groupList.Size = new System.Drawing.Size(121, 21);
             this.groupList.TabIndex = 40;
             this.groupList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
+            // 
+            // changablePrice
+            // 
+            this.changablePrice.AutoSize = true;
+            this.changablePrice.Enabled = false;
+            this.changablePrice.Location = new System.Drawing.Point(483, 58);
+            this.changablePrice.Name = "changablePrice";
+            this.changablePrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.changablePrice.Size = new System.Drawing.Size(73, 17);
+            this.changablePrice.TabIndex = 44;
+            this.changablePrice.Text = "سعر متغير";
+            this.changablePrice.UseVisualStyleBackColor = true;
+            // 
+            // tripDate
+            // 
+            this.tripDate.Enabled = false;
+            this.tripDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tripDate.Location = new System.Drawing.Point(135, 7);
+            this.tripDate.Name = "tripDate";
+            this.tripDate.Size = new System.Drawing.Size(106, 20);
+            this.tripDate.TabIndex = 45;
             // 
             // ViewTrip
             // 
@@ -826,9 +850,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 622);
             this.ControlBox = false;
+            this.Controls.Add(this.tripDate);
+            this.Controls.Add(this.changablePrice);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.tripDate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tripNotes);
             this.Controls.Add(this.label7);
@@ -851,6 +876,7 @@
             this.btnsClientsDoneEdits.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.actionButtons.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.btnsGroupDoneEdits.ResumeLayout(false);
@@ -896,7 +922,6 @@
         private System.Windows.Forms.Button addGroup;
         private System.Windows.Forms.Button createClient;
         private System.Windows.Forms.Button cancelCreate;
-        private System.Windows.Forms.TextBox tripDate;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Panel btnsClientsCreate;
         private System.Windows.Forms.Panel searchPanel;
@@ -936,5 +961,8 @@
         private System.Windows.Forms.Button doneEditGroup;
         private System.Windows.Forms.Button addGroupPortable;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox changablePrice;
+        private System.Windows.Forms.DateTimePicker tripDate;
+        private System.Windows.Forms.Panel actionButtons;
     }
 }
