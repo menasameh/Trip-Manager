@@ -12,6 +12,7 @@ namespace tripManager.model
         public int tripID { get; set; }
         public int clientID { get; set; }
 
+        public int ticketID { get; set; }
         public float priceToPay { get; set; }
         public float pricePaid { get; set; }
         public DateTime Date { get; set; }

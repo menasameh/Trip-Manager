@@ -132,6 +132,7 @@
             this.group.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.group.Size = new System.Drawing.Size(121, 21);
             this.group.TabIndex = 1;
+            this.group.SelectedIndexChanged += new System.EventHandler(this.group_SelectedIndexChanged);
             // 
             // bus
             // 
@@ -141,6 +142,7 @@
             this.bus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.bus.Size = new System.Drawing.Size(121, 21);
             this.bus.TabIndex = 2;
+            this.bus.SelectedIndexChanged += new System.EventHandler(this.bus_SelectedIndexChanged);
             // 
             // hasGroup
             // 
@@ -152,6 +154,7 @@
             this.hasGroup.TabIndex = 3;
             this.hasGroup.Text = "مجموعة";
             this.hasGroup.UseVisualStyleBackColor = true;
+            this.hasGroup.CheckedChanged += new System.EventHandler(this.hasGroup_CheckedChanged);
             // 
             // hasBus
             // 
@@ -163,6 +166,7 @@
             this.hasBus.TabIndex = 4;
             this.hasBus.Text = "اتوبيس";
             this.hasBus.UseVisualStyleBackColor = true;
+            this.hasBus.CheckedChanged += new System.EventHandler(this.hasBus_CheckedChanged);
             // 
             // label1
             // 

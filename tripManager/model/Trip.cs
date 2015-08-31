@@ -16,6 +16,7 @@ namespace tripManager.model
             reservations = new HashSet<Reservation>();
             groups = new HashSet<Group>();
             tripGroups = new HashSet<TripGroup>();
+            nextTicketID = 1;
         }
         public int ID { get; set; }
         public string name { get; set; }
@@ -25,7 +26,7 @@ namespace tripManager.model
         public Boolean hasChangablePrice { get; set; }
         public Boolean isFrozen { get; set; }
         public Boolean isDeleted { get; set; }
-
+        public int nextTicketID { get; set; }
 
 
         public virtual ICollection<Reservation> reservations { get; set; }

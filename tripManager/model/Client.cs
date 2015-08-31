@@ -14,7 +14,7 @@ namespace tripManager.model
         }
         public int ID { get; set; }
         public string name { get; set; }
-        public float phoneNumber { get; set; }
+        public string phoneNumber { get; set; }
 
         public virtual ICollection<ClientGroup> clientGroups { get; set; }
 

@@ -88,25 +88,9 @@
     <Compile Include="manageTrip.Designer.cs">
       <DependentUpon>manageTrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201508291024316_d.cs" />
-    <Compile Include="Migrations\201508291024316_d.Designer.cs">
-      <DependentUpon>201508291024316_d.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508291042170_g.cs" />
-    <Compile Include="Migrations\201508291042170_g.Designer.cs">
-      <DependentUpon>201508291042170_g.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508291135082_r.cs" />
-    <Compile Include="Migrations\201508291135082_r.Designer.cs">
-      <DependentUpon>201508291135082_r.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508291149293_r1.cs" />
-    <Compile Include="Migrations\201508291149293_r1.Designer.cs">
-      <DependentUpon>201508291149293_r1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508291405261_e.cs" />
-    <Compile Include="Migrations\201508291405261_e.Designer.cs">
-      <DependentUpon>201508291405261_e.cs</DependentUpon>
+    <Compile Include="Migrations\201508302251368_fg.cs" />
+    <Compile Include="Migrations\201508302251368_fg.Designer.cs">
+      <DependentUpon>201508302251368_fg.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="model\Client.cs" />
@@ -133,20 +117,8 @@
     <EmbeddedResource Include="manageTrip.resx">
       <DependentUpon>manageTrip.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508291024316_d.resx">
-      <DependentUpon>201508291024316_d.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508291042170_g.resx">
-      <DependentUpon>201508291042170_g.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508291135082_r.resx">
-      <DependentUpon>201508291135082_r.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508291149293_r1.resx">
-      <DependentUpon>201508291149293_r1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508291405261_e.resx">
-      <DependentUpon>201508291405261_e.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508302251368_fg.resx">
+      <DependentUpon>201508302251368_fg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

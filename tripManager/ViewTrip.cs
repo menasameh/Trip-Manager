@@ -20,12 +20,22 @@ namespace tripManager
         Trip trip;
         Group selectedGroup;
         Client selectedClient;
+        Reservation selectedReservation;
         int tripID;
         public bool open;
 
+        int grpIndex;
+        int busIndex;
 
         ArrayList groupsIDs;
         ArrayList groupsList;
+
+        ArrayList grpIDs;
+        ArrayList grpList;
+
+
+        ArrayList busesIDs;
+        ArrayList busesList;
 
 
 
@@ -53,20 +63,48 @@ namespace tripManager
         {
             DBHandler instance = DBHandler.getInstance();
             List<Group> groups = instance.getTripGroups(tripID);
+            List<Group> grps = groups.Where(g => !g.isBus).ToList();
+            List<Group> buses = groups.Where(g => g.isBus).ToList();
+
 
 
             groupsIDs = new ArrayList();
             groupsList = new ArrayList();
+
+            grpIDs = new ArrayList();
+            grpList = new ArrayList();
+
+            busesIDs = new ArrayList();
+            busesList = new ArrayList();
+
+
 
             for (int i = 0; i < groups.Count; i++)
             {
                 groupsList.Add(groups[i].name);
                 groupsIDs.Add(groups[i].ID);
             }
-            groupList.SelectedIndex = -1;
 
-            groupList.DataSource = groupsList;
+            for (int i = 0; i < grps.Count; i++)
+            {
+                grpList.Add(grps[i].name);
+                grpIDs.Add(grps[i].ID);
+            }
+
+            for (int i = 0; i < buses.Count; i++)
+            {
+                busesList.Add(buses[i].name);
+                groupsIDs.Add(buses[i].ID);
+            }
             groupList.SelectedIndex = -1;
+            group.SelectedIndex = -1;
+            bus.SelectedIndex = -1;
+            groupList.DataSource = groupsList;
+            group.DataSource = grpList;
+            bus.DataSource = busesList;
+            groupList.SelectedIndex = -1;
+            group.SelectedIndex = -1;
+            bus.SelectedIndex = -1;
             
         }
 
@@ -126,12 +164,18 @@ namespace tripManager
             clientName.Enabled = true;
             clientPay.Enabled = true;
             clientPhone.Enabled = true;
+            clientName.Text = "";
+            clientPay.Text = "";
+            clientPhone.Text = "";
             group.Enabled = false;
             bus.Enabled = false;
             hasBus.Enabled = true;
             hasGroup.Enabled = true;
-
-
+            hasBus.Checked = false;
+            hasGroup.Checked = false;
+            ShowChooseGroup();
+            updateGroupList();
+            clientID.Text = trip.nextTicketID+ "";
             clientDetails.Visible = true;
             searchPanel.Visible = false;
 
@@ -275,15 +319,65 @@ namespace tripManager
 
         private void addClient_Click(object sender, EventArgs e)
         {
-           
             clientsCreateElements();
         }
 
 
         private void createClient_Click(object sender, EventArgs e)
         {
+            DBHandler instance = DBHandler.getInstance();
+            selectedClient = new Client();
+            selectedReservation = new Reservation();
+            fieldsToClient();
+            fieldsToReservation();
 
-            clientsDefaults();
+
+            //validations goes here 
+            bool valid = true;
+            string msg = "";
+
+
+            //end validations
+
+            if (valid)
+            {
+                instance.insertResrvation(selectedClient, trip, selectedReservation);
+                if (hasGroup.Checked)
+                {
+                    instance.insertClientGroup(selectedClient.ID, (int)grpIDs[grpIndex]);
+                }
+                if (hasBus.Checked)
+                {
+                    instance.insertClientGroup(selectedClient.ID, (int)busesIDs[busIndex]);
+                }
+                Prompt.ShowWarningDialog("تم اضافة العميل بنجاح", "تم");
+                updateAutoComplete();
+                clientsDefaults();
+            }
+            else
+            {
+                Prompt.ShowWarningDialog(msg, "تحذير");
+            }
+        }
+
+        private void fieldsToReservation()
+        {
+            
+            selectedReservation.ticketID = int.Parse(clientID.Text);
+            selectedReservation.priceToPay = float.Parse(tripPrice.Text);
+            selectedReservation.pricePaid = float.Parse(clientPay.Text);
+            selectedReservation.Date = DateTime.Now;
+        }
+
+        private void updateAutoComplete()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void fieldsToClient()
+        {
+            selectedClient.name = clientName.Text;
+            selectedClient.phoneNumber = clientPhone.Text;
         }
 
         private void cancelCreate_Click(object sender, EventArgs e)
@@ -456,6 +550,7 @@ namespace tripManager
             if(index == -1){
                 return;
             }
+            
             //updateGroupList();
             DBHandler instance = DBHandler.getInstance();
             selectedGroup = instance.getGroup((int)groupsIDs[index]);
@@ -501,17 +596,34 @@ namespace tripManager
 
         private void ShowSizeLimit()
         {
-            if (hasSizeLimit.Checked)
-            {
-                groupSize.Enabled = true;
-            }
-            else
-            {
-                groupSize.Enabled = false;
-            }
+            groupSize.Enabled = hasSizeLimit.Checked;
         }
 
-       
+        private void hasGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowChooseGroup();
+        }
+
+        private void hasBus_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowChooseGroup();
+        }
+
+       private void ShowChooseGroup()
+        {
+            group.Enabled = hasGroup.Checked;
+            bus.Enabled = hasBus.Checked;
+        }
+
+       private void group_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           grpIndex = ((ComboBox)sender).SelectedIndex;
+       }
+
+       private void bus_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           busIndex = ((ComboBox)sender).SelectedIndex;
+       }
 
        
 

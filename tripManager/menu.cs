@@ -61,7 +61,6 @@ namespace tripManager
         {
             DBHandler instance = DBHandler.getInstance();
             List<Trip> trips = instance.getTrips();
-
             tripsIDs = new ArrayList();
             tripsList = new ArrayList();
 
