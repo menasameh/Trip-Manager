@@ -62,7 +62,7 @@
             this.searchPanel = new System.Windows.Forms.Panel();
             this.cancelSearch = new System.Windows.Forms.Button();
             this.search = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
+            this.searchLabel = new System.Windows.Forms.Label();
             this.searchText = new System.Windows.Forms.TextBox();
             this.byID = new System.Windows.Forms.RadioButton();
             this.byName = new System.Windows.Forms.RadioButton();
@@ -98,6 +98,9 @@
             this.groupList = new System.Windows.Forms.ComboBox();
             this.changablePrice = new System.Windows.Forms.CheckBox();
             this.tripDate = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.toPay = new System.Windows.Forms.Label();
+            this.deleteReservation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.viewTripClients)).BeginInit();
             this.clientDetails.SuspendLayout();
             this.btnsClientsCreate.SuspendLayout();
@@ -171,7 +174,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(346, 14);
+            this.label1.Location = new System.Drawing.Point(346, 29);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(30, 13);
@@ -180,6 +183,8 @@
             // 
             // clientDetails
             // 
+            this.clientDetails.Controls.Add(this.toPay);
+            this.clientDetails.Controls.Add(this.label12);
             this.clientDetails.Controls.Add(this.addGroupPortable);
             this.clientDetails.Controls.Add(this.clientID);
             this.clientDetails.Controls.Add(this.clientPay);
@@ -213,7 +218,7 @@
             // clientID
             // 
             this.clientID.Enabled = false;
-            this.clientID.Location = new System.Drawing.Point(10, 45);
+            this.clientID.Location = new System.Drawing.Point(10, 60);
             this.clientID.Name = "clientID";
             this.clientID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.clientID.Size = new System.Drawing.Size(100, 20);
@@ -221,7 +226,7 @@
             // 
             // clientPay
             // 
-            this.clientPay.Location = new System.Drawing.Point(10, 11);
+            this.clientPay.Location = new System.Drawing.Point(10, 26);
             this.clientPay.Name = "clientPay";
             this.clientPay.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.clientPay.Size = new System.Drawing.Size(100, 20);
@@ -229,7 +234,7 @@
             // 
             // clientPhone
             // 
-            this.clientPhone.Location = new System.Drawing.Point(203, 46);
+            this.clientPhone.Location = new System.Drawing.Point(203, 61);
             this.clientPhone.Name = "clientPhone";
             this.clientPhone.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.clientPhone.Size = new System.Drawing.Size(100, 20);
@@ -237,7 +242,7 @@
             // 
             // clientName
             // 
-            this.clientName.Location = new System.Drawing.Point(203, 11);
+            this.clientName.Location = new System.Drawing.Point(203, 26);
             this.clientName.Name = "clientName";
             this.clientName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.clientName.Size = new System.Drawing.Size(100, 20);
@@ -247,7 +252,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(127, 46);
+            this.label4.Location = new System.Drawing.Point(127, 61);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label4.Size = new System.Drawing.Size(59, 13);
@@ -257,7 +262,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 14);
+            this.label3.Location = new System.Drawing.Point(116, 29);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(70, 13);
@@ -267,7 +272,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(314, 46);
+            this.label2.Location = new System.Drawing.Point(314, 61);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(62, 13);
@@ -448,7 +453,7 @@
             // 
             this.searchPanel.Controls.Add(this.cancelSearch);
             this.searchPanel.Controls.Add(this.search);
-            this.searchPanel.Controls.Add(this.label10);
+            this.searchPanel.Controls.Add(this.searchLabel);
             this.searchPanel.Controls.Add(this.searchText);
             this.searchPanel.Controls.Add(this.byID);
             this.searchPanel.Controls.Add(this.byName);
@@ -478,17 +483,19 @@
             this.search.UseVisualStyleBackColor = true;
             this.search.Click += new System.EventHandler(this.search_Click);
             // 
-            // label10
+            // searchLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(252, 48);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 13);
-            this.label10.TabIndex = 40;
-            this.label10.Text = "الاسم";
+            this.searchLabel.AutoSize = true;
+            this.searchLabel.Location = new System.Drawing.Point(252, 48);
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(30, 13);
+            this.searchLabel.TabIndex = 40;
+            this.searchLabel.Text = "الاسم";
             // 
             // searchText
             // 
+            this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.Location = new System.Drawing.Point(17, 45);
             this.searchText.Name = "searchText";
             this.searchText.Size = new System.Drawing.Size(217, 20);
@@ -505,6 +512,7 @@
             this.byID.TabStop = true;
             this.byID.Text = "رقم التذكرة";
             this.byID.UseVisualStyleBackColor = true;
+            this.byID.CheckedChanged += new System.EventHandler(this.byID_CheckedChanged);
             // 
             // byName
             // 
@@ -517,10 +525,11 @@
             this.byName.TabStop = true;
             this.byName.Text = "الاسم";
             this.byName.UseVisualStyleBackColor = true;
+            this.byName.CheckedChanged += new System.EventHandler(this.byName_CheckedChanged);
             // 
             // edit
             // 
-            this.edit.Location = new System.Drawing.Point(27, 25);
+            this.edit.Location = new System.Drawing.Point(27, 15);
             this.edit.Name = "edit";
             this.edit.Size = new System.Drawing.Size(75, 23);
             this.edit.TabIndex = 37;
@@ -530,16 +539,17 @@
             // 
             // deleteClient
             // 
-            this.deleteClient.Location = new System.Drawing.Point(27, 57);
+            this.deleteClient.Location = new System.Drawing.Point(27, 43);
             this.deleteClient.Name = "deleteClient";
             this.deleteClient.Size = new System.Drawing.Size(75, 23);
             this.deleteClient.TabIndex = 38;
-            this.deleteClient.Text = "مسح";
+            this.deleteClient.Text = "مسح العميل";
             this.deleteClient.UseVisualStyleBackColor = true;
             this.deleteClient.Click += new System.EventHandler(this.deleteClient_Click);
             // 
             // btnsClientsSelected
             // 
+            this.btnsClientsSelected.Controls.Add(this.deleteReservation);
             this.btnsClientsSelected.Controls.Add(this.cancelEditClient);
             this.btnsClientsSelected.Controls.Add(this.edit);
             this.btnsClientsSelected.Controls.Add(this.deleteClient);
@@ -550,7 +560,7 @@
             // 
             // cancelEditClient
             // 
-            this.cancelEditClient.Location = new System.Drawing.Point(27, 89);
+            this.cancelEditClient.Location = new System.Drawing.Point(27, 99);
             this.cancelEditClient.Name = "cancelEditClient";
             this.cancelEditClient.Size = new System.Drawing.Size(75, 23);
             this.cancelEditClient.TabIndex = 40;
@@ -848,6 +858,35 @@
             this.tripDate.Size = new System.Drawing.Size(106, 20);
             this.tripDate.TabIndex = 45;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(116, 4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "مطلوب للسداد";
+            // 
+            // toPay
+            // 
+            this.toPay.AutoSize = true;
+            this.toPay.Location = new System.Drawing.Point(83, 5);
+            this.toPay.Name = "toPay";
+            this.toPay.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toPay.Size = new System.Drawing.Size(19, 13);
+            this.toPay.TabIndex = 32;
+            this.toPay.Text = "50";
+            // 
+            // deleteReservation
+            // 
+            this.deleteReservation.Location = new System.Drawing.Point(27, 71);
+            this.deleteReservation.Name = "deleteReservation";
+            this.deleteReservation.Size = new System.Drawing.Size(75, 23);
+            this.deleteReservation.TabIndex = 41;
+            this.deleteReservation.Text = "مسح الحجز";
+            this.deleteReservation.UseVisualStyleBackColor = true;
+            this.deleteReservation.Click += new System.EventHandler(this.deleteReservation_Click);
+            // 
             // ViewTrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -931,7 +970,7 @@
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.RadioButton byID;
         private System.Windows.Forms.RadioButton byName;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.TextBox searchText;
         private System.Windows.Forms.Button cancelSearch;
         private System.Windows.Forms.Button search;
@@ -968,5 +1007,8 @@
         private System.Windows.Forms.CheckBox changablePrice;
         private System.Windows.Forms.DateTimePicker tripDate;
         private System.Windows.Forms.Panel actionButtons;
+        private System.Windows.Forms.Label toPay;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button deleteReservation;
     }
 }

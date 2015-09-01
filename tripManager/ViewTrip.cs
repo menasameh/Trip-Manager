@@ -62,7 +62,7 @@ namespace tripManager
         public void updateGroupList()
         {
             DBHandler instance = DBHandler.getInstance();
-            List<Group> groups = instance.getTripGroups(tripID);
+            List<Group> groups = trip.tripGroups.Select(tg => tg.group).ToList();
             List<Group> grps = groups.Where(g => !g.isBus).ToList();
             List<Group> buses = groups.Where(g => g.isBus).ToList();
 
@@ -94,7 +94,7 @@ namespace tripManager
             for (int i = 0; i < buses.Count; i++)
             {
                 busesList.Add(buses[i].name);
-                groupsIDs.Add(buses[i].ID);
+                busesIDs.Add(buses[i].ID);
             }
             groupList.SelectedIndex = -1;
             group.SelectedIndex = -1;
@@ -116,6 +116,7 @@ namespace tripManager
             tripDate.Value = trip.Date;
             tripPrice.Text = trip.price + "";
             tripNotes.Text = trip.notes;
+            toPay.Text = trip.price + "";
             changablePrice.Checked = trip.hasChangablePrice;
             tripCount.Text = trip.reservations.Count + "";
         }
@@ -217,9 +218,11 @@ namespace tripManager
             hasBus.Enabled = false;
             hasGroup.Enabled = false;
 
-
+            searchText.Text = "";
+            updateAutoComplete();
             clientDetails.Visible = false;
             searchPanel.Visible = true;
+            byName.Checked = true;
 
             btnsClientsCreate.Visible = false;
             btnsClientsDoneEdits.Visible = false;
@@ -235,7 +238,8 @@ namespace tripManager
             hasBus.Enabled = false;
             hasGroup.Enabled = false;
 
-
+            group.Enabled = false;
+            bus.Enabled = false;
             clientDetails.Visible = true;
             searchPanel.Visible = false;
 
@@ -271,6 +275,7 @@ namespace tripManager
             hasBus.Enabled = true;
             hasGroup.Enabled = true;
 
+            ShowChooseGroup();
 
             clientDetails.Visible = true;
             searchPanel.Visible = false;
@@ -351,7 +356,8 @@ namespace tripManager
                     instance.insertClientGroup(selectedClient.ID, (int)busesIDs[busIndex]);
                 }
                 Prompt.ShowWarningDialog("تم اضافة العميل بنجاح", "تم");
-                updateAutoComplete();
+                //updateAutoComplete();
+                tripToFields();
                 clientsDefaults();
             }
             else
@@ -362,7 +368,6 @@ namespace tripManager
 
         private void fieldsToReservation()
         {
-            
             selectedReservation.ticketID = int.Parse(clientID.Text);
             selectedReservation.priceToPay = float.Parse(tripPrice.Text);
             selectedReservation.pricePaid = float.Parse(clientPay.Text);
@@ -371,7 +376,13 @@ namespace tripManager
 
         private void updateAutoComplete()
         {
-            throw new NotImplementedException();
+            DBHandler instance = DBHandler.getInstance();
+            List<Client> arr = instance.getTripClients(trip.ID);
+            AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+            if(arr.Count!=0){
+                col.AddRange(arr.Select(a => a.name +"-"+ a.phoneNumber).ToArray());
+            }
+            searchText.AutoCompleteCustomSource = col;
         }
 
         private void fieldsToClient()
@@ -398,7 +409,60 @@ namespace tripManager
 
         private void search_Click(object sender, EventArgs e)
         {
+            DBHandler instance = DBHandler.getInstance();
+            if(byName.Checked){
+            string[] list= searchText.Text.Split('-');
+            string name = list[0];
+            string phone = list[1];
+            selectedClient = instance.getClient(name, phone);
+            }
+            else
+            {
+                selectedClient = instance.getClient(int.Parse(searchText.Text));
+            }
             clientsSelectElements();
+            clientToFields();
+            //fieldsToClient();
+        }
+
+        private void clientToFields()
+        {
+            DBHandler instance = DBHandler.getInstance();
+            List<Group> tripGrps = trip.tripGroups.Select(tg=>tg.group).ToList();
+            List<Group> clientGrps = selectedClient.clientGroups.Select(cg=>cg.group).ToList();
+            List<Group> clintTripGrps = tripGrps.Intersect(clientGrps).ToList();
+            Group sgrp = clintTripGrps.Where(g=> !g.isBus).FirstOrDefault();
+            Group sbus = clintTripGrps.Where(g=> g.isBus).FirstOrDefault();
+            selectedReservation = instance.getReservation(selectedClient.ID, trip.ID);
+
+            clientName.Text = selectedClient.name;
+            clientPhone.Text = selectedClient.phoneNumber;
+            toPay.Text = selectedReservation.priceToPay+"";
+            clientPay.Text = selectedReservation.pricePaid+"";
+            clientID.Text = selectedReservation.ticketID+"";
+            if (sgrp != null)
+            {
+                hasGroup.Checked = true;
+                group.Text = sgrp.name;
+            }
+            else
+            {
+                hasGroup.Checked = false;
+                group.Text = "";
+            }
+            if (sbus != null)
+            {
+                hasBus.Checked = true;
+                bus.Text = sbus.name;
+            }
+            else
+            {
+                hasBus.Checked = false;
+                bus.Text = "";
+            }
+                group.Enabled = false;
+                bus.Enabled = false;
+            //hasGroup.Checked = 
         }
 
         private void edit_Click(object sender, EventArgs e)
@@ -415,6 +479,8 @@ namespace tripManager
         {
             int promptValue = Prompt.ShowConfirmDialog("هل تود بالفعل مسح العميل ؟", "تحذير");
             if(promptValue == 1){
+                DBHandler instance = DBHandler.getInstance();
+                instance.removeClient(selectedClient);
                 clientsDefaults();
             }
             else
@@ -439,7 +505,53 @@ namespace tripManager
 
         private void doneEdit_Click(object sender, EventArgs e)
         {
-            clientsSelectElements();
+            DBHandler instance = DBHandler.getInstance();
+            fieldsToClient();
+            selectedReservation.pricePaid = float.Parse(clientPay.Text);
+            selectedReservation.Date = DateTime.Now;
+            List<Group> tripGrps = trip.tripGroups.Select(tg => tg.group).ToList();
+            List<Group> clientGrps = selectedClient.clientGroups.Select(cg => cg.group).ToList();
+            List<Group> clintTripGrps = tripGrps.Intersect(clientGrps).ToList();
+            Group sgrp = clintTripGrps.Where(g => !g.isBus).FirstOrDefault();
+            Group sbus = clintTripGrps.Where(g => g.isBus).FirstOrDefault();
+            
+            //validations goes here 
+            bool valid = true;
+            string msg = "";
+
+
+            //end validations
+
+            if (valid)
+            {
+                if (sgrp != null)
+                {
+                    instance.removeClientGroup(selectedClient.ID, sgrp.ID);
+                }
+                if (sbus != null)
+                {
+                    instance.removeClientGroup(selectedClient.ID, sbus.ID);
+                }
+                if (hasGroup.Checked)
+                {
+                    instance.insertClientGroup(selectedClient.ID, (int)grpIDs[grpIndex]);
+                }
+                if (hasBus.Checked)
+                {
+                    instance.insertClientGroup(selectedClient.ID, (int)busesIDs[busIndex]);
+                }
+                Prompt.ShowWarningDialog("تم تعديل العميل بنجاح", "تم");
+                //updateAutoComplete();
+                instance.updateResrvation(selectedReservation);
+                instance.updateClient(selectedClient);
+                tripToFields();
+                clientsSelectElements();
+            }
+            else
+            {
+                Prompt.ShowWarningDialog(msg, "تحذير");
+            }
+            
         }
 
 
@@ -623,6 +735,49 @@ namespace tripManager
        private void bus_SelectedIndexChanged(object sender, EventArgs e)
        {
            busIndex = ((ComboBox)sender).SelectedIndex;
+       }
+
+       private void byName_CheckedChanged(object sender, EventArgs e)
+       {
+           searchLabel.Text = "الاسم";
+           updateAutoComplete();
+       }
+
+       private void byID_CheckedChanged(object sender, EventArgs e)
+       {
+           searchLabel.Text = "رقم التذكرة";
+           clearAutoComplete();
+       }
+
+       private void clearAutoComplete()
+       {
+           AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+           searchText.AutoCompleteCustomSource = col;
+       }
+
+       private void deleteReservation_Click(object sender, EventArgs e)
+       {
+           int promptValue = Prompt.ShowConfirmDialog("هل تود بالفعل مسح الحجز ؟", "تحذير");
+           if (promptValue == 1)
+           {
+               DBHandler instance = DBHandler.getInstance();
+               List<Group> tripGrps = trip.tripGroups.Select(tg=>tg.group).ToList();
+               List<Group> clientGrps = selectedClient.clientGroups.Select(cg=>cg.group).ToList();
+               List<Group> clintTripGrps = tripGrps.Intersect(clientGrps).ToList();
+               Group sgrp = clintTripGrps.Where(g=> !g.isBus).FirstOrDefault();
+               Group sbus = clintTripGrps.Where(g=> g.isBus).FirstOrDefault();
+               instance.removeResrvation(selectedReservation);
+               if (sgrp != null)
+               {
+                   instance.removeClientGroup(selectedClient.ID, sgrp.ID);
+               }
+               if (sbus != null)
+               {
+                   instance.removeClientGroup(selectedClient.ID, sbus.ID);
+               }
+
+               clientsDefaults();
+           }
        }
 
        

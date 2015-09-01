@@ -50,9 +50,11 @@
             this.manageTripBack2 = new System.Windows.Forms.Button();
             this.createControls = new System.Windows.Forms.Panel();
             this.changablePrice = new System.Windows.Forms.CheckBox();
+            this.numberOfParticipants = new System.Windows.Forms.Panel();
             this.basicContols.SuspendLayout();
             this.editEndControls.SuspendLayout();
             this.createControls.SuspendLayout();
+            this.numberOfParticipants.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -88,7 +90,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(212, 55);
+            this.label4.Location = new System.Drawing.Point(100, 12);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label4.Size = new System.Drawing.Size(74, 13);
@@ -114,7 +116,7 @@
             // tripCount
             // 
             this.tripCount.AutoSize = true;
-            this.tripCount.Location = new System.Drawing.Point(130, 55);
+            this.tripCount.Location = new System.Drawing.Point(18, 12);
             this.tripCount.Name = "tripCount";
             this.tripCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tripCount.Size = new System.Drawing.Size(13, 13);
@@ -277,12 +279,22 @@
             this.changablePrice.Text = "سعر متغير";
             this.changablePrice.UseVisualStyleBackColor = true;
             // 
+            // numberOfParticipants
+            // 
+            this.numberOfParticipants.Controls.Add(this.tripCount);
+            this.numberOfParticipants.Controls.Add(this.label4);
+            this.numberOfParticipants.Location = new System.Drawing.Point(95, 45);
+            this.numberOfParticipants.Name = "numberOfParticipants";
+            this.numberOfParticipants.Size = new System.Drawing.Size(200, 32);
+            this.numberOfParticipants.TabIndex = 21;
+            // 
             // manageTrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 395);
             this.ControlBox = false;
+            this.Controls.Add(this.numberOfParticipants);
             this.Controls.Add(this.changablePrice);
             this.Controls.Add(this.createControls);
             this.Controls.Add(this.label5);
@@ -290,10 +302,8 @@
             this.Controls.Add(this.basicContols);
             this.Controls.Add(this.editEndControls);
             this.Controls.Add(this.tripDate);
-            this.Controls.Add(this.tripCount);
             this.Controls.Add(this.tripPrice);
             this.Controls.Add(this.tripName);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -303,6 +313,8 @@
             this.basicContols.ResumeLayout(false);
             this.editEndControls.ResumeLayout(false);
             this.createControls.ResumeLayout(false);
+            this.numberOfParticipants.ResumeLayout(false);
+            this.numberOfParticipants.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,5 +344,6 @@
         private System.Windows.Forms.Button manageTripBack2;
         private System.Windows.Forms.Panel createControls;
         private System.Windows.Forms.CheckBox changablePrice;
+        private System.Windows.Forms.Panel numberOfParticipants;
     }
 }

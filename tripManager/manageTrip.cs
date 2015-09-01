@@ -42,7 +42,7 @@ namespace tripManager
             tripNotes.Enabled = false;
             changablePrice.Enabled = false;
 
-
+            numberOfParticipants.Visible = true;
             basicContols.Visible = true;
             createControls.Visible = false;
             editEndControls.Visible = false;
@@ -72,6 +72,9 @@ namespace tripManager
             tripNotes.Enabled = true;
             changablePrice.Enabled = true;
 
+
+
+            numberOfParticipants.Visible = false;
             basicContols.Visible = false;
             createControls.Visible = true;
             editEndControls.Visible = false;
@@ -198,6 +201,10 @@ namespace tripManager
             if (!instance.updateTrip(trip))
             {
                 Prompt.ShowWarningDialog("error", "error");
+            }
+            if (!trip.hasChangablePrice)
+            {
+                instance.updateTripReservations(trip.ID, trip.price);
             }
             showBasicButtons();
         }
